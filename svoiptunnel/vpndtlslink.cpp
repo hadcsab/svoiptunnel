@@ -11,7 +11,7 @@ VPNDTLSLink::VPNDTLSLink( boost::asio::io_service& io_service, const string& add
 	_socket->setEvents( this );
 	_socket->connect( addr, port );
 
-	_ctx = SSL_CTX_new(DTLSv1_client_method());
+	_ctx = SSL_CTX_new(DTLS_method());
 
 	//https://www.openssl.org/docs/apps/ciphers.html
 	SSL_CTX_set_cipher_list(_ctx, "ALL");
@@ -51,7 +51,7 @@ VPNDTLSLink::VPNDTLSLink( boost::asio::io_service& io_service, unsigned short nL
 	_wbio( NULL ),
 	_handshaking( false )
 {
-	_ctx = SSL_CTX_new(DTLSv1_server_method());
+	_ctx = SSL_CTX_new(DTLS_server_method());
 
 	//https://www.openssl.org/docs/apps/ciphers.html
 	SSL_CTX_set_cipher_list(_ctx, "ALL");
